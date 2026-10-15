@@ -106,11 +106,9 @@ async function enterChat(page: Page, name = "みほ") {
 }
 
 async function ask(page: Page, question: string) {
-  const quickReply = page
-    .locator(".quick-replies")
-    .getByRole("button", {
-      name: new RegExp(question.replace(/[?？]/g, "[?？]")),
-    });
+  const quickReply = page.locator(".quick-replies").getByRole("button", {
+    name: new RegExp(question.replace(/[?？]/g, "[?？]")),
+  });
   await quickReply.click();
   await expect(quickReply).toHaveCount(0);
   await expect(page.locator(".typing")).toHaveCount(0);
@@ -138,6 +136,7 @@ test("all seven screens: Miho, gallery, profile, fallback, two questions, offer,
   page.on("pageerror", (error) => errors.push(error.message));
   await page.goto("/");
   await ready(page, "welcome");
+  await expect(page.locator(".welcome-photo-caption small")).toHaveText("68");
   await capture(page, info, "01-welcome", [
     page.getByRole("button", { name: "出会いをはじめる" }),
   ]);
@@ -149,6 +148,7 @@ test("all seven screens: Miho, gallery, profile, fallback, two questions, offer,
   ]);
   await page.getByRole("button", { name: /甘い人が好き/ }).click();
   await ready(page, "discover");
+  await expect(page.locator(".name-line h2 span")).toHaveText("68");
   await capture(page, info, "03-discover", [
     page.getByRole("button", { name: "いい根！", exact: true }),
     page.getByRole("button", { name: "ごめん根", exact: true }),
@@ -221,16 +221,14 @@ test("all seven screens: Miho, gallery, profile, fallback, two questions, offer,
     .fill("こんにちは、畑はどんな香りですか？");
   await page.getByRole("button", { name: "メッセージを送信" }).click();
   await expect(page.locator(".conversation")).toContainText(
-    "これは台本で会話を楽しむ体験版なので",
+    "決まった台本で話す体験版",
   );
   await expect(
     page.getByRole("textbox", { name: "メッセージ", exact: true }),
   ).toHaveValue("");
   await expect(product(page)).toHaveCount(0);
   await ask(page, "どうして農家になったんですか？");
-  await expect(page.locator(".conversation")).toContainText(
-    "もともと東京で会社員をしてたんです",
-  );
+  await expect(page.locator(".conversation")).toContainText("気づけば48年です");
   await expect(product(page)).toHaveCount(0);
   await ask(page, "本当に甘やかしてくれるんですか？笑");
   await expect(product(page)).toHaveCount(1);
@@ -240,7 +238,7 @@ test("all seven screens: Miho, gallery, profile, fallback, two questions, offer,
   await expect(
     page
       .locator(".bubble")
-      .filter({ hasText: "そうだ、よかったらうちのいちご" }),
+      .filter({ hasText: "そうだ、いちごを2パック用意したの" }),
   ).toHaveCount(1);
   await product(page).click();
   await ready(page, "offer");

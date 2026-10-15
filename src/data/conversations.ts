@@ -4,8 +4,8 @@ import type { Conversation, FarmerId } from "./types";
 export const conversations: Record<FarmerId, Conversation> = {
   miho: {
     greeting: [
-      "いい根！ありがとうございます！🍓\nみほです。よろしくお願いします！",
-      "プロフィール見てくれました？\n『甘やかすのが得意』って書いてますけど、本当です。笑",
+      "いい根！ありがとうね。みほです🍓\nちょうどひと息ついたところ。まずお茶にしましょう。",
+      "甘やかすのは得意ですよ。\nまず座って。いちご食べて。話はそれから。",
     ],
     questions: [
       {
@@ -13,8 +13,8 @@ export const conversations: Record<FarmerId, Conversation> = {
         questionId: "reason",
         userMessage: "どうして農家になったんですか？",
         farmerResponse: [
-          "もともと東京で会社員をしてたんです。\n\n最初は実家の農園を継ぐつもりは全然なくて。\n\nでも帰省したときに、お客さんが父のいちごを食べて『今年も美味しいね』って言ってるのを見て。\n\nなんだか、こういう仕事っていいなって思ったんです。",
-          "まあ、朝が早いのは今でも苦手ですけどね😂",
+          "親の畑を手伝い始めたのが20歳。気づけば48年です。\n\n『今年も待ってたよ』って言われると、また苗を注文しちゃうのよ。",
+          "長続きの秘訣？\nたぶん、毎年『来年こそは少し楽に』と思っていることね。まだ実現してないけど。",
         ],
         typingDelay: 800,
         nextRecommendedQuestion: "sweet",
@@ -25,7 +25,8 @@ export const conversations: Record<FarmerId, Conversation> = {
         questionId: "sweet",
         userMessage: "本当に甘やかしてくれるんですか？笑",
         farmerResponse: [
-          "もちろんです！笑\n\nでも、うちのいちごの方が甘いかもしれません🍓",
+          "甘やかしますよ。\n帰りに持たせる野菜は、断っても増えます。",
+          "『そんなに食べきれません』と言われたら、漬物にして持たせます。そこは任せて。",
         ],
         typingDelay: 650,
         nextRecommendedQuestion: "care",
@@ -36,7 +37,8 @@ export const conversations: Record<FarmerId, Conversation> = {
         questionId: "care",
         userMessage: "いちごのこだわりは？",
         farmerResponse: [
-          "毎朝、ハウスの中を歩きながら状態を見るのが好きなんです。\n\n同じ畑でも日によって全然違うんですよ。\n\n手がかかるけど、そこが面白いんです。",
+          "毎朝、葉っぱと実の様子を見て回ります。\n実が多ければ、ちゃんと間引く。全部育てたくなるけど、そこは我慢です。",
+          "いちごには厳しく、人にはおかわり。\n同じ甘やかし方はできないのよ。",
         ],
         typingDelay: 750,
         nextRecommendedQuestion: "pesticides",
@@ -47,7 +49,8 @@ export const conversations: Record<FarmerId, Conversation> = {
         questionId: "pesticides",
         userMessage: "農薬は使っていますか？",
         farmerResponse: [
-          "必要なときには使用しています。\n\n使ったものや回数は記録していますので、気になることは何でも聞いてくださいね！",
+          "必要なときは使います。使った日や量も記録していますよ。\n気になることは、遠慮なく聞いてね。",
+          "毎日の見回りも大事です。\n『こらっ』で虫が帰ってくれたら、私も楽なんだけどね。",
         ],
         typingDelay: 700,
         nextRecommendedQuestion: "reason",
@@ -55,13 +58,13 @@ export const conversations: Record<FarmerId, Conversation> = {
       },
     ],
     fallback:
-      "メッセージありがとうございます🍓 これは台本で会話を楽しむ体験版なので、下の質問から選んでもらえるとうれしいです！",
-    invitation: "そうだ、よかったらうちのいちご、食べてみませんか？🍓",
+      "ここは決まった台本で話す体験版なの。下の質問から選んでね。いちごをつまむつもりで、気楽にどうぞ🍓",
+    invitation: "そうだ、いちごを2パック用意したの。まずはこれくらいから。私の『少し』にしては控えめよ🍓",
   },
   takumi: {
     greeting: [
-      "いい根！ありがとうございます！\n今年はトマトがかなりいい感じなんです🍅",
-      "たくみです。トマトの話になると、ちょっと長くなるかもしれません。笑",
+      "いい根、どうも。たくみです🍅\nハウスの見回りが終わりました。今日もトマトに異常なし。",
+      "トマト一筋50年です。\n浮気をする暇があったら、脇芽を取っています。",
     ],
     questions: [
       {
@@ -69,7 +72,8 @@ export const conversations: Record<FarmerId, Conversation> = {
         questionId: "reason",
         userMessage: "どうして農家になったんですか？",
         farmerResponse: [
-          "最初は父に言われて手伝っていただけなんです。\n\nでも、自分で育てたトマトを食べた人に『こんな甘いトマト初めて！』って言われて。\n\nその顔が忘れられなくて、気づいたら8年目です。",
+          "22歳のとき、父の畑を手伝い始めました。\n『来年はもっとよくなる』と思って、50年です。",
+          "今年も課題が出ました。\nトマトの研究には、定年がないようです。",
         ],
         typingDelay: 800,
         nextRecommendedQuestion: "care",
@@ -80,8 +84,8 @@ export const conversations: Record<FarmerId, Conversation> = {
         questionId: "care",
         userMessage: "トマトのこだわりは？",
         farmerResponse: [
-          "僕自身がトマトをそのまま丸かじりするのが好きなので、まず自分が美味しいと思えるものを目指しています。",
-          "収穫したてをひと口。それで今日の調子がわかるんです🍅",
+          "水は決まった量を機械的に、とはいきません。\n土の乾き具合と、葉の様子と、天気を見ます。",
+          "『今日は休みにしよう』と思った朝ほど、天気予報を見直すことになります。予定はトマト優先です。",
         ],
         typingDelay: 700,
         nextRecommendedQuestion: "dog",
@@ -92,8 +96,8 @@ export const conversations: Record<FarmerId, Conversation> = {
         questionId: "dog",
         userMessage: "愛犬はどんな子ですか？",
         farmerResponse: [
-          "柴犬で、名前はむぎです。僕より社交的で、散歩すると必ず誰かに話しかけられます。",
-          "畑に行く準備をすると玄関で待ってるんですよ。頼れる相棒です。",
+          "柴犬のむぎです。畑の見回りについてきます。\n近所への挨拶は、だいたいあっちが担当です。",
+          "見回りが終わると、先に家へ帰ろうとします。\n残業はしない方針らしい。見習いたいですね。",
         ],
         typingDelay: 650,
         nextRecommendedQuestion: "cooking",
@@ -104,8 +108,8 @@ export const conversations: Record<FarmerId, Conversation> = {
         questionId: "cooking",
         userMessage: "おすすめの食べ方、教えてください！",
         farmerResponse: [
-          "料理が趣味って書いたんですけど、実はまだ練習中で…。",
-          "まずは何もつけずに、そのまま食べてほしいです。それだけは自信あります。笑",
+          "まずは切って、そのまま。次に塩を少し。\n余ったら卵と炒めるといいです。",
+          "私は切る係です。\n育てるのに50年かけたので、調理は手短に済ませています。",
         ],
         typingDelay: 750,
         nextRecommendedQuestion: "reason",
@@ -113,14 +117,14 @@ export const conversations: Record<FarmerId, Conversation> = {
       },
     ],
     fallback:
-      "ありがとうございます。ここは決まった台本で楽しむ体験版なんです。下の質問を選んでみてください。トマトの話なら、任せてください🍅",
+      "ここは決まった台本で話す体験版です。下の質問を選んでください。土とトマトの話なら、口数が増えます🍅",
     invitation:
-      "話していたら、食べてもらいたくなりました。うちのトマト、少しおすそ分けしてもいいですか？🍅",
+      "トマト、少し食べてみますか。説明はこの辺にして、あとは現物に任せます🍅",
   },
   masao: {
     greeting: [
-      "いい根、ありがとうね。\nスマホはまだ慣れんけど、よろしくお願いします🌾",
-      "まさおです。孫に教わって、なんとかここまで来ました。ゆっくり話しましょう。",
+      "いい根、ありがとうね。まさおです🌾\n田んぼの水を見てきたところです。",
+      "米とは55年の付き合いです。\n毎年付き合い方が変わるので、まだ勉強中ですね。",
     ],
     questions: [
       {
@@ -128,7 +132,8 @@ export const conversations: Record<FarmerId, Conversation> = {
         questionId: "reason",
         userMessage: "どうして農家になったんですか？",
         farmerResponse: [
-          "親父の代からずっとこの田んぼを守っとるんです。\n\n毎年同じように作っていても、同じ年は一度もない。\n\nそこが米作りの面白いところだね。",
+          "21歳で親父の田んぼを継いで、55年。\n同じように作っても、同じ年はひとつもないんです。",
+          "ベテランとは言われますがね。\n天気のほうは、こちらの経歴を見てくれません。",
         ],
         typingDelay: 900,
         nextRecommendedQuestion: "family",
@@ -139,8 +144,8 @@ export const conversations: Record<FarmerId, Conversation> = {
         questionId: "family",
         userMessage: "農家をしていて嬉しいことは？",
         farmerResponse: [
-          "新米の時期になると孫が帰ってくるんですよ。\n\n米をいっぱい食べてくれるのが、何より嬉しいですね。",
-          "「じいじ、おかわり」ってね。それを聞くと、来年も頑張ろうと思うんです。",
+          "新米の時期は、家族がよく帰ってきます。\n『元気だった？』の次には『米、ある？』ですね。",
+          "おかわりの声が聞けるのが、いちばん嬉しい。\n帰りの車は少し重くなります。米を積むので。",
         ],
         typingDelay: 850,
         nextRecommendedQuestion: "care",
@@ -151,8 +156,8 @@ export const conversations: Record<FarmerId, Conversation> = {
         questionId: "care",
         userMessage: "美味しいごはんを炊くコツは？",
         farmerResponse: [
-          "わしは炊く前に、少しゆっくり水を吸わせるのが好きです。あとは炊飯器に任せとります。",
-          "炊きたてに梅干しひとつ。それだけで、ごちそうですよ。",
+          "まずは袋や炊飯器の説明どおりに。\n新米なら、そこから好みの水加減を探すといいですよ。",
+          "田んぼでは私が頑張ります。\n台所では炊飯器に頑張ってもらいます。分担です。",
         ],
         typingDelay: 800,
         nextRecommendedQuestion: "holiday",
@@ -163,8 +168,8 @@ export const conversations: Record<FarmerId, Conversation> = {
         questionId: "holiday",
         userMessage: "お休みの日は何をしていますか？",
         farmerResponse: [
-          "釣りですねえ。釣れん日も、水辺に座っとるだけで気持ちがいい。",
-          "最近は孫から写真が届くのも楽しみでね。返信の「いいね」の場所は、やっと覚えました。",
+          "釣りです。でも出かける前に、田んぼの水を見ます。\n気になる所があると、そのまま長居してしまう。",
+          "魚との約束は流れますが、稲との約束は守れます。\n結局どっちにしても、水辺にいますね。",
         ],
         typingDelay: 900,
         nextRecommendedQuestion: "reason",
@@ -172,8 +177,8 @@ export const conversations: Record<FarmerId, Conversation> = {
       },
     ],
     fallback:
-      "ありがとうね。これは台本に沿って話す体験版なんだそうです。下の質問を押してみてください。わしのこと、もう少し話しましょう。",
+      "ここは決まった台本で話す体験版です。下の質問を選んでください。田んぼの話なら、お茶一杯ぶんくらい付き合えますよ。",
     invitation:
-      "よかったら、うちの米も食べてみてください。食卓で思い出してもらえたら、嬉しいですね🌾",
+      "米を少し、持っていきませんか。おかずはいつものもので。ごはんの減り具合を見てやってください🌾",
   },
 };

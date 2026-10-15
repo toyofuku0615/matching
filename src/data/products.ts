@@ -14,7 +14,7 @@ export const products: Record<FarmerId, Product> = {
     price: "¥1,800",
     shipping: "送料込み · 体験版の架空価格です",
     letter:
-      "今年も甘く育ってくれました。\nよかったら食べてみてください！\n— みほ",
+      "まずは2パック。私にしては控えめです。\nお茶を入れて、座って食べてね。\n— みほ",
     cta: "この人のいちごを食べてみたい",
   },
   takumi: {
@@ -26,7 +26,7 @@ export const products: Record<FarmerId, Product> = {
     price: "¥1,600",
     shipping: "送料込み · 体験版の架空価格です",
     letter:
-      "まずは、そのままひと口。\n僕が好きなこの味、気に入ってもらえたら嬉しいです。\n— たくみ",
+      "まずは切って、そのまま。\n説明は短めに。味の話はトマトに任せます。\n— たくみ",
     cta: "この人のトマトを食べてみたい",
   },
   masao: {
@@ -38,7 +38,7 @@ export const products: Record<FarmerId, Product> = {
     price: "¥1,400",
     shipping: "送料込み · 体験版の架空価格です",
     letter:
-      "いつもの食卓で、たくさん食べてください。\nおかわりしてもらえたら、それがいちばんです。\n— まさお",
+      "おかずは、いつものもので。\nおかわりが出たら、今年もひと安心です。\n— まさお",
     cta: "この人のお米を食べてみたい",
   },
 };
