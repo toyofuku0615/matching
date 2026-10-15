@@ -1,4 +1,5 @@
 import type { Conversation, FarmerId } from "./types";
+import { agriculture } from "./agriculture";
 
 /** Fixed demo scripts only: no AI, live messages, or real farming claims. */
 export const conversations: Record<FarmerId, Conversation> = {
@@ -37,7 +38,7 @@ export const conversations: Record<FarmerId, Conversation> = {
         questionId: "care",
         userMessage: "いちごのこだわりは？",
         farmerResponse: [
-          "毎朝、葉っぱと実の様子を見て回ります。\n実が多ければ、ちゃんと間引く。全部育てたくなるけど、そこは我慢です。",
+          `うちの『${agriculture.miho.brand}』は、${agriculture.miho.variety}という品種。${agriculture.miho.method}で育てて、色づきを見て朝に摘みます。\n毎朝、葉っぱと実も確認。実が多ければ、ちゃんと間引く。全部育てたくなるけど、そこは我慢です。`,
           "いちごには厳しく、人にはおかわり。\n同じ甘やかし方はできないのよ。",
         ],
         typingDelay: 750,
@@ -59,7 +60,8 @@ export const conversations: Record<FarmerId, Conversation> = {
     ],
     fallback:
       "ここは決まった台本で話す体験版なの。下の質問から選んでね。いちごをつまむつもりで、気楽にどうぞ🍓",
-    invitation: "そうだ、いちごを2パック用意したの。まずはこれくらいから。私の『少し』にしては控えめよ🍓",
+    invitation:
+      "そうだ、いちごを2パック用意したの。まずはこれくらいから。私の『少し』にしては控えめよ🍓",
   },
   takumi: {
     greeting: [
@@ -84,7 +86,7 @@ export const conversations: Record<FarmerId, Conversation> = {
         questionId: "care",
         userMessage: "トマトのこだわりは？",
         farmerResponse: [
-          "水は決まった量を機械的に、とはいきません。\n土の乾き具合と、葉の様子と、天気を見ます。",
+          `『${agriculture.takumi.brand}』は、大玉の${agriculture.takumi.variety}を${agriculture.takumi.method}で。樹の上で色づくのを待ちます。\n水は決まった量を機械的に、とはいきません。土の乾き具合と、葉の様子と、天気を見ます。`,
           "『今日は休みにしよう』と思った朝ほど、天気予報を見直すことになります。予定はトマト優先です。",
         ],
         typingDelay: 700,
@@ -154,10 +156,10 @@ export const conversations: Record<FarmerId, Conversation> = {
       {
         farmerId: "masao",
         questionId: "care",
-        userMessage: "美味しいごはんを炊くコツは？",
+        userMessage: "合鴨農法って何ですか？",
         farmerResponse: [
-          "まずは袋や炊飯器の説明どおりに。\n新米なら、そこから好みの水加減を探すといいですよ。",
-          "田んぼでは私が頑張ります。\n台所では炊飯器に頑張ってもらいます。分担です。",
+          `『${agriculture.masao.brand}』は、${agriculture.masao.variety}を${agriculture.masao.method}で育てています。\n合鴨に草や虫を食べてもらうんです。泳いで水をかき混ぜるのも、草を育ちにくくする仕事です。`,
+          "私は水の深さや稲を見ます。穂を食べられないよう、穂が出る前には合鴨を田んぼから上げます。\n台所では炊飯器に頑張ってもらいます。分担です。",
         ],
         typingDelay: 800,
         nextRecommendedQuestion: "holiday",

@@ -1,17 +1,16 @@
 import { Heart, Sprout } from "lucide-react";
+import { copy } from "../data/copy";
 export function Brand({ large = false }: { large?: boolean }) {
   return (
     <div
       className={`brand ${large ? "brand-large" : ""}`}
-      aria-label="農miai のうみあい"
+      aria-label={copy.shared.name}
     >
       <span className="brand-mark">
         <Heart fill="currentColor" />
         <Sprout className="brand-sprout" />
       </span>
-      <span>
-        農<span className="brand-latin">miai</span>
-      </span>
+      <span className="brand-name">{copy.shared.name}</span>
     </div>
   );
 }

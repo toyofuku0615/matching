@@ -7,6 +7,7 @@ import {
 } from "@playwright/test";
 import { mkdir } from "node:fs/promises";
 import { resolve } from "node:path";
+import { assertHoretaneBrand } from "./assertions";
 
 const screen = (page: Page, name: string) => page.locator(`.screen-${name}`);
 const product = (page: Page) => page.locator(".chat-product");
@@ -26,6 +27,7 @@ async function inViewport(locator: Locator) {
 }
 
 async function checkLayout(page: Page) {
+  await assertHoretaneBrand(page);
   await expect
     .poll(() =>
       page
@@ -200,6 +202,11 @@ test("all seven screens: Miho, gallery, profile, fallback, two questions, offer,
   await expect(profile).toBeVisible();
   await page.getByRole("button", { name: "閉じる" }).click();
   await expect(profile).toHaveCount(0);
+  await page.getByRole("button", { name: "体験メニュー" }).click();
+  await expect(page.getByRole("dialog")).toContainText("あなたの、ほれたね。");
+  await assertHoretaneBrand(page);
+  await page.getByRole("button", { name: "閉じる" }).click();
+  await expect(page.getByRole("dialog")).toHaveCount(0);
   await page.getByRole("button", { name: "いい根！", exact: true }).click();
   await ready(page, "matched");
   await capture(page, info, "04-matched", [
@@ -293,12 +300,17 @@ test("skipping all farmers has a useful recovery", async ({ page }) => {
 });
 
 for (const farmer of [
-  { name: "たくみ", skips: 1, second: "トマトのこだわりは？", crop: "トマト" },
+  {
+    name: "たくみ",
+    skips: 1,
+    second: "トマトのこだわりは？",
+    variety: "桃太郎",
+  },
   {
     name: "まさお",
     skips: 2,
     second: "農家をしていて嬉しいことは？",
-    crop: "お米",
+    variety: "コシヒカリ",
   },
 ]) {
   test(`skipping selects ${farmer.name} with their own conversation and product`, async ({
@@ -319,7 +331,7 @@ for (const farmer of [
     await expect(product(page)).toContainText(
       `${farmer.name}さんからのおすそ分け`,
     );
-    await expect(product(page)).toContainText(farmer.crop);
+    await expect(product(page)).toContainText(farmer.variety);
     await checkLayout(page);
   });
 }

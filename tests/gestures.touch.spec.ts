@@ -1,6 +1,7 @@
 import { expect, test, type CDPSession, type Page } from "@playwright/test";
 import { mkdir } from "node:fs/promises";
 import { resolve } from "node:path";
+import { assertHoretaneBrand } from "./assertions";
 
 test.use({ hasTouch: true, isMobile: true });
 
@@ -82,7 +83,17 @@ const experiencedFarmers = [
     tagline: "甘やかすのが得意です。",
     greeting: "まずお茶にしましょう。",
     invitation: "私の『少し』にしては控えめよ",
-    product: "完熟いちご お試しセット",
+    brand: "みほの甘やかしいちご",
+    variety: "とちあいか",
+    method: "土耕栽培",
+    practices: [
+      "根っこが育つ土づくり",
+      "葉っぱと実を毎朝確認",
+      "色づきを見て朝採り",
+    ],
+    careQuestion: "いちごのこだわりは？",
+    product: "とちあいか おすそ分け",
+    productTitle: "朝採れ とちあいか お試しセット",
     questions: [
       [
         "本当に甘やかしてくれるんですか？笑",
@@ -104,7 +115,17 @@ const experiencedFarmers = [
     tagline: "トマト一筋、浮気しません。",
     greeting: "今日もトマトに異常なし。",
     invitation: "あとは現物に任せます",
-    product: "完熟トマト お試しセット",
+    brand: "たくみの一途トマト",
+    variety: "桃太郎",
+    method: "土耕栽培",
+    practices: [
+      "水やりは畑に聞く",
+      "脇芽の手入れをこつこつ",
+      "樹の上で色づきを待つ",
+    ],
+    careQuestion: "トマトのこだわりは？",
+    product: "桃太郎 おすそ分け",
+    productTitle: "完熟 桃太郎トマト お試しセット",
     questions: [
       [
         "どうして農家になったんですか？",
@@ -126,7 +147,17 @@ const experiencedFarmers = [
     tagline: "米とは55年の真剣交際。",
     greeting: "田んぼの水を見てきたところです。",
     invitation: "米を少し、持っていきませんか。",
-    product: "新潟のお米 お試しセット",
+    brand: "まさおの合鴨田んぼ米",
+    variety: "コシヒカリ",
+    method: "合鴨農法",
+    practices: [
+      "合鴨は草取りの相棒",
+      "泳ぐ仕事と、水を見る仕事",
+      "穂が出る前に選手交代",
+    ],
+    careQuestion: "合鴨農法って何ですか？",
+    product: "コシヒカリ おすそ分け",
+    productTitle: "合鴨育ち コシヒカリ お試しセット",
     questions: [
       [
         "どうして農家になったんですか？",
@@ -137,7 +168,7 @@ const experiencedFarmers = [
         "帰りの車は少し重くなります。米を積むので。",
       ],
       [
-        "美味しいごはんを炊くコツは？",
+        "合鴨農法って何ですか？",
         "台所では炊飯器に頑張ってもらいます。分担です。",
       ],
       [
@@ -160,6 +191,7 @@ for (const farmer of experiencedFarmers) {
     );
     await mkdir(directory, { recursive: true });
     await page.goto("/");
+    await assertHoretaneBrand(page);
     await page.getByRole("button", { name: "出会いをはじめる" }).tap();
     await page.getByRole("button", { name: /甘い人が好き/ }).tap();
     await expect(page.locator(".screen-discover")).toBeVisible();
@@ -176,6 +208,10 @@ for (const farmer of experiencedFarmers) {
     await expect(card).toBeVisible();
     await expect(card.locator(".name-line h2 span")).toHaveText(farmer.age);
     await expect(card.locator(".tagline")).toHaveText(farmer.tagline);
+    const cardAgriculture = card.locator(".farmer-agriculture");
+    await expect(cardAgriculture).toContainText(farmer.variety);
+    await expect(cardAgriculture).toContainText(farmer.method);
+    await expect(cardAgriculture).toBeInViewport({ ratio: 1 });
     await expect
       .poll(() =>
         card
@@ -216,6 +252,32 @@ for (const farmer of experiencedFarmers) {
           ),
       )
       .toBe(true);
+    const farmingProfile = profile.locator(".agriculture-info");
+    await expect(farmingProfile.locator(".agriculture-brand")).toHaveText(
+      farmer.brand,
+    );
+    await expect(farmingProfile.locator(".agriculture-facts")).toContainText(
+      farmer.variety,
+    );
+    await expect(farmingProfile.locator(".agriculture-facts")).toContainText(
+      farmer.method,
+    );
+    for (const practice of farmer.practices) {
+      const practiceTitle = farmingProfile
+        .locator(".agriculture-practices")
+        .getByText(practice, { exact: true });
+      await practiceTitle.scrollIntoViewIfNeeded();
+      await expect(practiceTitle).toBeInViewport({ ratio: 1 });
+    }
+    await farmingProfile.locator(".agriculture-brand").scrollIntoViewIfNeeded();
+    await expect(farmingProfile.locator(".agriculture-brand")).toBeInViewport();
+    await page.screenshot({
+      path: `${directory}/10-${farmer.id}-growing-profile.png`,
+      animations: "disabled",
+    });
+    await expect(page.getByRole("button", { name: "閉じる" })).toBeInViewport({
+      ratio: 1,
+    });
     await page.getByRole("button", { name: "閉じる" }).tap();
     await expect(profile).toHaveCount(0);
     await page.getByRole("button", { name: "いい根！", exact: true }).tap();
@@ -249,6 +311,32 @@ for (const farmer of experiencedFarmers) {
           .locator(".message-row.own .bubble")
           .filter({ hasText: question }),
       ).toHaveCount(1);
+      if (question === farmer.careQuestion) {
+        const careAnswer = conversation
+          .locator(".message-row:not(.own) .bubble")
+          .filter({ hasText: farmer.brand });
+        await expect(careAnswer).toContainText(farmer.variety);
+        await expect(careAnswer).toContainText(farmer.method);
+        if (farmer.id === "masao") {
+          await expect
+            .poll(() =>
+              careAnswer.evaluate((el) =>
+                Number(getComputedStyle(el.closest(".message-row")!).opacity),
+              ),
+            )
+            .toBe(1);
+          await conversation
+            .locator(".message-row.own .bubble")
+            .filter({ hasText: question })
+            .evaluate((el) =>
+              el.scrollIntoView({ block: "start", behavior: "instant" }),
+            );
+          await page.screenshot({
+            path: `${directory}/12-masao-aigamo-chat.png`,
+            animations: "disabled",
+          });
+        }
+      }
       await expect(page.locator(".quick-replies button")).toHaveCount(
         3 - index,
       );
@@ -274,6 +362,12 @@ for (const farmer of experiencedFarmers) {
       conversation.locator(".bubble").filter({ hasText: farmer.invitation }),
     ).toHaveCount(1);
     await expect(page.locator(".chat-product")).toContainText(farmer.product);
+    await expect(page.locator(".chat-product-agriculture")).toContainText(
+      farmer.variety,
+    );
+    await expect(page.locator(".chat-product-agriculture")).toContainText(
+      farmer.method,
+    );
     await expect
       .poll(() =>
         page
@@ -290,6 +384,38 @@ for (const farmer of experiencedFarmers) {
     ).toBe(true);
     await page.screenshot({
       path: `${directory}/08-${farmer.id}-dialogue.png`,
+      animations: "disabled",
+    });
+    await page.locator(".chat-product").tap();
+    await expect(page.locator(".screen-offer")).toBeVisible();
+    await expect(page.locator(".product-brand")).toHaveText(farmer.brand);
+    await expect(page.locator(".offer-information h2")).toHaveText(
+      farmer.productTitle,
+    );
+    const offerAgriculture = page.locator(
+      ".offer-information .agriculture-info",
+    );
+    await expect(offerAgriculture.locator(".agriculture-facts")).toContainText(
+      farmer.variety,
+    );
+    await expect(offerAgriculture.locator(".agriculture-facts")).toContainText(
+      farmer.method,
+    );
+    await offerAgriculture.scrollIntoViewIfNeeded();
+    await expect(offerAgriculture).toBeInViewport();
+    await expect(page.locator(".offer-bottom .primary")).toBeInViewport({
+      ratio: 1,
+    });
+    await assertHoretaneBrand(page);
+    await expect
+      .poll(() =>
+        page
+          .locator(".screen-offer")
+          .evaluate((el) => Number(getComputedStyle(el).opacity)),
+      )
+      .toBe(1);
+    await page.screenshot({
+      path: `${directory}/11-${farmer.id}-agriculture-offer.png`,
       animations: "disabled",
     });
     expect(errors).toEqual([]);

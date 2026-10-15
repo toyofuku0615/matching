@@ -3,8 +3,8 @@ import type { PreferenceOption } from "./types";
 /** Main interface copy lives here so the experience can be edited without touching UI. */
 export const copy = {
   shared: {
-    name: "農miai",
-    pronunciation: "のうみあい",
+    name: "ほれたね",
+    pronunciation: "ほれたね",
     demo: "体験版",
     back: "戻る",
     close: "閉じる",
@@ -138,8 +138,8 @@ export const preferenceOptions: PreferenceOption[] = [
 export const ui = {
   app: {
     desktopSignature: "PEOPLE FIRST. PRODUCE SECOND.",
-    miniWordmark: "NOU MIAI",
-    welcomePronunciation: "の う み あ い",
+    miniWordmark: "HORETANE",
+    welcomePronunciation: "H O R E T A N E",
     welcomePortraitsLabel: "これから出会う3人の農家",
     welcomeTakumiAlt: "たくみさん、トマト農家",
     welcomeMihoAlt: "笑顔のみほさん、いちご農家",
@@ -166,7 +166,7 @@ export const ui = {
     offerFrom: "お話しした、あの人から。",
     offerPhotoCaption: "人を知ると、おいしくなる。",
     completionDoodle: "nice to meet you.",
-    settingsTitle: "あなたの、農miai。",
+    settingsTitle: "あなたの、ほれたね。",
     settingsDescription: "つくる人を知る、小さな出会いの体験。",
     settingsMatchSubtitle: "育ちはじめたご縁を、見にいく",
     settingsNoMatchTitle: "「いい根！」で、会話がはじまります。",
@@ -174,7 +174,7 @@ export const ui = {
     generatedImages: "写真は架空の人物・農産物を表現した生成画像です。",
     noTransactions: "メッセージ送信・注文・決済は行いません。",
     desktopFooter: "農家という人を、好きになる。",
-    copyright: "© 農miai · INTERACTIVE DEMO",
+    copyright: "© ほれたね · INTERACTIVE DEMO",
   },
   swipe: {
     profileLabel: (name: string) => `${name}さんのプロフィール`,

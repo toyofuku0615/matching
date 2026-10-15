@@ -1,4 +1,4 @@
-# 農miai（のうみあい）
+# ほれたね
 
 「運命よりも、産直。」農家という人を好きになる、約3分間のインタラクティブWebモックです。
 
@@ -38,6 +38,7 @@ npm run preview
 React 19 / TypeScript / Vite / Tailwind CSS 4 / Motion for React / Lucide React。日本語フォントはNoto Sans JPをローカル配信します。
 
 - `src/data/farmers.ts`：農家3人のプロフィールと写真
+- `src/data/agriculture.ts`：農家ごとのブランド・品種・農法・栽培のこだわり
 - `src/data/conversations.ts`：農家別の挨拶、4問の会話台本、共通返信、誘い文
 - `src/data/products.ts`：商品写真・架空価格・送料・手紙
 - `src/data/copy.ts`：画面コピーと診断の表示順
@@ -60,21 +61,20 @@ Linuxの `/usr/bin/chromium` があればテストはそれを使用し、それ
 
 検証はChromiumで実施しています。実機のiOS Safari・Android Chromeは未検証です。指定されたデザイン参考サイトは環境プロキシの403応答で閲覧できなかったため、添付された詳細なデザイン・操作仕様を基準に実装しています。
 
-
 ## Vercelで公開
 
 このリポジトリは `package.json`、`index.html`、`src/` がリポジトリ直下にあるViteアプリです。クラウドのチェックアウト先は `/workspace/matching` ですが、GitHub内の `matching/` サブディレクトリではありません。
 
-| Vercelの設定 | 値 |
-| --- | --- |
-| Root Directory | `.`（リポジトリ直下。初期値のまま） |
-| Framework Preset | Vite |
-| Install Command | `npm ci` |
-| Build Command | `npm run build` |
-| Output Directory | `dist` |
-| Node.js Version | 24.x |
-| Production Branch | `main` |
-| 環境変数 | 不要 |
+| Vercelの設定      | 値                                  |
+| ----------------- | ----------------------------------- |
+| Root Directory    | `.`（リポジトリ直下。初期値のまま） |
+| Framework Preset  | Vite                                |
+| Install Command   | `npm ci`                            |
+| Build Command     | `npm run build`                     |
+| Output Directory  | `dist`                              |
+| Node.js Version   | 24.x                                |
+| Production Branch | `main`                              |
+| 環境変数          | 不要                                |
 
 `vercel.json` にFramework・インストール・ビルド・出力先を、`package.json` の `engines` にNode.jsのバージョンを保存しています。Vercel管理画面に既存の上書き設定がある場合は、上の値に揃えてください。Root DirectoryはVercelのプロジェクト設定で指定します。
 
@@ -85,3 +85,13 @@ Linuxの `/usr/bin/chromium` があればテストはそれを使用し、それ
 5. 公開URLで「出会いをはじめる」から「ご縁が実りました！」まで操作し、スマートフォンでも画像とボタンが表示されることを確認してください。
 
 公開URLはVercelが発行したものを使用してください。開発用localhost URLやクラウド開発環境の「公開」は、VercelのWebアプリ公開URLとは別のものです。
+
+## デモの農産物と栽培のこだわり
+
+| 農家   | デモ用のブランド     | 品種       | 栽培方法                                         |
+| ------ | -------------------- | ---------- | ------------------------------------------------ |
+| みほ   | みほの甘やかしいちご | とちあいか | 土耕栽培、熟し具合を見極めて朝採り               |
+| たくみ | たくみの一途トマト   | 桃太郎     | 土耕栽培、土・葉・天気に応じた水管理             |
+| まさお | まさおの合鴨田んぼ米 | コシヒカリ | 合鴨農法、合鴨と水管理を組み合わせた田んぼづくり |
+
+品種・農法の名称は実在しますが、登場する農家のブランド名や栽培実績は架空のデモ設定です。農法だけを理由に無農薬・有機認証などを表示しません。プロフィール詳細、会話、おすそ分けに同じ設定を使います。

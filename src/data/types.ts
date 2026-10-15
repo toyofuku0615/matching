@@ -6,6 +6,14 @@ export interface FarmerPhoto {
   position: string;
 }
 
+export interface AgricultureProfile {
+  brand: string;
+  variety: string;
+  method: string;
+  summary: string;
+  practices: { title: string; description: string }[];
+}
+
 export interface Farmer {
   id: FarmerId;
   name: string;
@@ -20,6 +28,7 @@ export interface Farmer {
   personality: string[];
   reason: string;
   surprise: string;
+  agriculture: AgricultureProfile;
   photos: FarmerPhoto[];
   dailyCaption: string;
 }

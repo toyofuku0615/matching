@@ -21,6 +21,7 @@ import { Brand, YouAvatar } from "./components/Brand";
 import { SwipeCard } from "./components/SwipeCard";
 import { Chat } from "./components/Chat";
 import { Modal } from "./components/Modal";
+import { AgricultureInfo } from "./components/AgricultureInfo";
 import { farmers, getFarmer } from "./data/farmers";
 import { products } from "./data/products";
 import { copy, preferenceOptions, ui } from "./data/copy";
@@ -572,12 +573,20 @@ export default function App() {
                         </span>
                       </div>
                       <div className="offer-information">
+                        <p className="product-brand">
+                          <Sprout size={12} />
+                          {activeFarmer.agriculture.brand}
+                        </p>
                         <p className="product-subtitle">{product.subtitle}</p>
                         <h2>{product.title}</h2>
                         <div className="offer-price">
                           {product.price}
                           <span>{product.shipping}</span>
                         </div>
+                        <AgricultureInfo
+                          agriculture={activeFarmer.agriculture}
+                          compact
+                        />
                         <div className="letter-card">
                           <span className="letter-heart">
                             <Heart size={19} />
@@ -820,6 +829,7 @@ function ProfileDetail({ farmer }: { farmer: Farmer }) {
               {farmer.emoji} {farmer.crop}
             </strong>
           </div>
+          <AgricultureInfo agriculture={farmer.agriculture} />
         </section>
         <section>
           <h3>{copy.discover.daily}</h3>

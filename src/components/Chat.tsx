@@ -117,7 +117,11 @@ export function Chat({
             <div className="chat-product-text">
               <span className="tiny-eyebrow">{ui.chat.giftEyebrow}</span>
               <strong>{product.shortTitle}</strong>
-              <span>
+              <span className="chat-product-agriculture">
+                <Sprout size={11} />
+                {farmer.agriculture.variety}・{farmer.agriculture.method}
+              </span>
+              <span className="chat-product-price">
                 {product.price} <small>／ {product.shipping}</small>
               </span>
               <div>

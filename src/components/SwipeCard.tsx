@@ -170,6 +170,10 @@ export function SwipeCard({ farmer, nextFarmer, onDecide, onDetails }: Props) {
                 {ui.swipe.farmerCrop(farmer.crop)}
               </span>
             </div>
+            <div className="farmer-agriculture">
+              <span>{farmer.agriculture.variety}</span>
+              <span>{farmer.agriculture.method}</span>
+            </div>
             <p className="tagline">{farmer.tagline}</p>
             <button className="about-link" onClick={onDetails}>
               {ui.swipe.about} <ChevronRight size={14} />

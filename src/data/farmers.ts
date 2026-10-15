@@ -1,4 +1,5 @@
 import type { Farmer, FarmerId } from "./types";
+import { agriculture } from "./agriculture";
 
 const image = (name: string) =>
   `${import.meta.env.BASE_URL}images/${name}.webp`;
@@ -20,6 +21,7 @@ export const farmers: Farmer[] = [
     reason:
       "親の畑を手伝っていたら、いつの間にか48年。「今年も待ってたよ」と言われるとね。来年の苗の注文まで、手が早くなります。",
     surprise: "「少し持っていきな」の「少し」は、うちでは段ボール1箱です。",
+    agriculture: agriculture.miho,
     photos: [
       {
         src: image("miho"),
@@ -54,7 +56,9 @@ export const farmers: Farmer[] = [
     personality: ["研究熱心", "几帳面", "口数は少なめ"],
     reason:
       "父の手伝いで始めました。「来年はもっとよくなる」と思って続けて50年。毎年、来年の課題がちゃんと出ます。",
-    surprise: "トマト作りは50年。料理は今でも、切る係です。包丁の手入れだけは一人前。",
+    surprise:
+      "トマト作りは50年。料理は今でも、切る係です。包丁の手入れだけは一人前。",
+    agriculture: agriculture.takumi,
     photos: [
       {
         src: image("takumi"),
@@ -90,6 +94,7 @@ export const farmers: Farmer[] = [
     reason:
       "親父の田んぼを継いで55年。同じように作っても、同じ年はひとつもない。まだ卒業証書はもらえんですね。",
     surprise: "釣りの予定は田んぼ次第。先約は、だいたい稲です。",
+    agriculture: agriculture.masao,
     photos: [
       {
         src: image("masao"),

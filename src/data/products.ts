@@ -1,4 +1,5 @@
 import type { FarmerId, Product } from "./types";
+import { agriculture } from "./agriculture";
 
 const image = (name: string) =>
   `${import.meta.env.BASE_URL}images/${name}.webp`;
@@ -7,38 +8,35 @@ const image = (name: string) =>
 export const products: Record<FarmerId, Product> = {
   miho: {
     id: "miho-strawberry-share",
-    title: "朝採れいちご お試しセット",
-    shortTitle: "完熟いちご お試しセット",
-    subtitle: "みほさんが育てたいちご · 2パック",
+    title: `朝採れ ${agriculture.miho.variety} お試しセット`,
+    shortTitle: `${agriculture.miho.variety} おすそ分け`,
+    subtitle: `${agriculture.miho.variety} · ${agriculture.miho.method} · 2パック`,
     image: image("strawberries"),
     price: "¥1,800",
     shipping: "送料込み · 体験版の架空価格です",
-    letter:
-      "まずは2パック。私にしては控えめです。\nお茶を入れて、座って食べてね。\n— みほ",
+    letter: `${agriculture.miho.method}で育てた${agriculture.miho.variety}を、朝に摘みました。\nまずは2パック。私にしては控えめです。\nお茶を入れて、座って食べてね。\n— みほ`,
     cta: "この人のいちごを食べてみたい",
   },
   takumi: {
     id: "takumi-tomato-share",
-    title: "完熟トマト お試しセット",
-    shortTitle: "完熟トマト お試しセット",
-    subtitle: "たくみさんが育てたトマト · 約700g",
+    title: `完熟 ${agriculture.takumi.variety}トマト お試しセット`,
+    shortTitle: `${agriculture.takumi.variety} おすそ分け`,
+    subtitle: `${agriculture.takumi.variety} · ${agriculture.takumi.method} · 約700g`,
     image: image("tomatoes"),
     price: "¥1,600",
     shipping: "送料込み · 体験版の架空価格です",
-    letter:
-      "まずは切って、そのまま。\n説明は短めに。味の話はトマトに任せます。\n— たくみ",
+    letter: `${agriculture.takumi.method}の${agriculture.takumi.variety}。樹の上で色づくのを待ちました。\nまずは切って、そのまま。\n説明は短めに。味の話はトマトに任せます。\n— たくみ`,
     cta: "この人のトマトを食べてみたい",
   },
   masao: {
     id: "masao-rice-share",
-    title: "まさおの新米 お試しセット",
-    shortTitle: "新潟のお米 お試しセット",
-    subtitle: "まさおさんが育てたお米 · 2合×3袋",
+    title: `合鴨育ち ${agriculture.masao.variety} お試しセット`,
+    shortTitle: `${agriculture.masao.variety} おすそ分け`,
+    subtitle: `${agriculture.masao.variety} · ${agriculture.masao.method} · 2合×3袋`,
     image: image("rice"),
     price: "¥1,400",
     shipping: "送料込み · 体験版の架空価格です",
-    letter:
-      "おかずは、いつものもので。\nおかわりが出たら、今年もひと安心です。\n— まさお",
+    letter: `${agriculture.masao.method}で育てた${agriculture.masao.variety}です。\nおかずは、いつものもので。\nおかわりが出たら、今年もひと安心です。\n— まさお`,
     cta: "この人のお米を食べてみたい",
   },
 };

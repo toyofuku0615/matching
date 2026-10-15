@@ -246,7 +246,8 @@ input {
   gap: 2px;
 }
 .header-left .brand {
-  font-size: 24px;
+  font-size: 22px;
+  letter-spacing: -0.055em;
 }
 .header-left .brand-mark {
   width: 22px;
@@ -891,8 +892,24 @@ input {
   align-items: center;
   gap: 3px;
 }
+.farmer-agriculture {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 9px;
+}
+.farmer-agriculture > span {
+  border: 1px solid #ffffff3d;
+  border-radius: 5px;
+  background: #ffffff12;
+  padding: 3px 7px;
+  color: #fff9f2;
+  font-size: 9px;
+  font-weight: 450;
+  line-height: 1.4;
+}
 .tagline {
-  margin-top: 13px;
+  margin-top: 9px;
   font-size: 17px;
   font-weight: 650;
   line-height: 1.6;
@@ -1427,9 +1444,17 @@ input {
   font-size: 13px;
   font-weight: 650;
 }
-.chat-product-text > span:nth-last-child(2) {
+.chat-product-price {
   font-size: 12px;
   font-weight: 650;
+}
+.chat-product-agriculture {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  color: #8b9a81;
+  font-size: 9px;
+  line-height: 1.6;
 }
 .chat-product-text small {
   font-size: 8px;
@@ -1605,6 +1630,18 @@ input {
 }
 .offer-information {
   padding: 21px 24px 23px;
+}
+.product-brand {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: #b46f88;
+  font-size: 10px;
+  font-weight: 650;
+  margin-bottom: 8px;
+}
+.product-brand > svg {
+  color: #8ba181;
 }
 .product-subtitle {
   color: #a0949b;
@@ -1968,6 +2005,101 @@ input {
   border-radius: 20px;
   padding: 5px 12px;
   backdrop-filter: blur(6px);
+}
+.agriculture-info {
+  margin-top: 12px;
+  border: 1px solid #eaf0e5;
+  border-radius: 15px;
+  padding: 17px 16px;
+  background: #fbfcf8;
+}
+.agriculture-info .agriculture-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #8b9a80;
+  font-size: 9px;
+  font-weight: 500;
+  line-height: 1.6;
+  letter-spacing: 0.04em;
+}
+.agriculture-brand {
+  display: block;
+  margin-top: 6px;
+  color: #635e56;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.7;
+}
+.agriculture-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+  margin: 13px 0 10px;
+}
+.agriculture-facts > div {
+  display: flex;
+  align-items: baseline;
+  gap: 7px;
+}
+.agriculture-facts dt {
+  color: #a2a593;
+  font-size: 9px;
+}
+.agriculture-facts dd {
+  margin: 0;
+  color: #78826b;
+  font-size: 11px;
+  font-weight: 600;
+}
+.agriculture-info .agriculture-summary {
+  color: #8b867a;
+  font-size: 12px;
+  line-height: 1.9;
+}
+.agriculture-practices {
+  list-style: none;
+  padding: 15px 0 0;
+  margin: 15px 0 0;
+  border-top: 1px solid #e9eee1;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.agriculture-practices > li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+.practice-sprout {
+  flex-shrink: 0;
+  color: #96a585;
+  padding-top: 3px;
+}
+.agriculture-practices strong {
+  display: block;
+  color: #7c806b;
+  font-size: 11px;
+  font-weight: 650;
+  line-height: 1.8;
+}
+.agriculture-info .agriculture-practices p {
+  margin-top: 3px;
+  color: #9b9488;
+  font-size: 11px;
+  line-height: 1.85;
+}
+.agriculture-info.compact {
+  margin-top: 20px;
+  padding: 13px 15px;
+}
+.agriculture-info.compact .agriculture-facts {
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+.agriculture-info.compact .agriculture-summary {
+  font-size: 11px;
 }
 .daily-photo {
   height: 160px;
@@ -2396,7 +2528,7 @@ input {
 .chat-product-text strong {
   font-size: 14px;
 }
-.chat-product-text > span:nth-last-child(2) {
+.chat-product-price {
   font-size: 14px;
 }
 .detail-body p {
