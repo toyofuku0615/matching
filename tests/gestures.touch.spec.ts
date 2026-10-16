@@ -121,7 +121,7 @@ const experiencedFarmers = [
     practices: [
       "毎朝の観察で水加減を決める",
       "脇芽の手入れをこつこつ",
-      "樹の上で色づきを待つ",
+      "熟し具合を見て収穫",
     ],
     careQuestion: "誰の顔色をうかがっているんですか？",
     product: "桃太郎 おすそ分け",
@@ -151,9 +151,9 @@ const experiencedFarmers = [
     variety: "コシヒカリ",
     method: "合鴨農法",
     practices: [
-      "合鴨は草取りの相棒",
-      "泳ぐ仕事と、水を見る仕事",
-      "穂が出る前に選手交代",
+      "合鴨が草や虫を食べる",
+      "泳いで水をかき混ぜる",
+      "穂が出る前に合鴨を移す",
     ],
     careQuestion: "なんでそんなにカモを飼っているんですか？",
     product: "コシヒカリ おすそ分け",
@@ -255,7 +255,7 @@ for (const farmer of experiencedFarmers) {
     const farmingProfile = profile.locator(".agriculture-info");
     if (farmer.id === "masao") {
       await expect(profile.locator(".detail-body > p").first()).toContainText(
-        "カモを30羽",
+        "30羽の合鴨",
       );
       await expect(
         farmingProfile.locator(".agriculture-summary"),

@@ -31,7 +31,7 @@ export const agriculture: Record<FarmerId, AgricultureProfile> = {
     variety: "桃太郎",
     method: "土耕栽培",
     summary:
-      "大玉トマトの桃太郎を、土でじっくり。毎朝、葉と実の色、土の湿り、天気を確かめ、水の量やハウスの換気を調整します。50年続けても、昨日の正解が今日も正解とは限りません。",
+      "大玉トマトの桃太郎を土耕栽培で育てています。毎朝の観察をもとに、水やりやハウスの換気を調整しています。",
     practices: [
       {
         title: "毎朝の観察で水加減を決める",
@@ -43,9 +43,9 @@ export const agriculture: Record<FarmerId, AgricultureProfile> = {
         description: "脇芽を取り、葉や茎を整えて、光と風が届きやすくします。",
       },
       {
-        title: "樹の上で色づきを待つ",
+        title: "熟し具合を見て収穫",
         description:
-          "樹についたまま熟し具合を確かめ、食べごろを見て収穫します。",
+          "実を株につけたまま熟すのを待ち、色づきを確かめて収穫します。",
       },
     ],
   },
@@ -53,19 +53,19 @@ export const agriculture: Record<FarmerId, AgricultureProfile> = {
     brand: "まさおの合鴨田んぼ米",
     variety: "コシヒカリ",
     method: "合鴨農法",
-    summary: `コシヒカリを、${MASAO_DUCK_COUNT}羽の合鴨と育てています。草や虫を食べ、水をかき混ぜるのが合鴨の仕事。水の深さや稲の管理は、55年目の私の仕事です。`,
+    summary: `コシヒカリを、${MASAO_DUCK_COUNT}羽の合鴨と育てています。合鴨に草や虫を食べてもらいながら、私は水の深さや稲の状態を毎日確認します。`,
     practices: [
       {
-        title: "合鴨は草取りの相棒",
+        title: "合鴨が草や虫を食べる",
         description: `田植え後の田んぼに${MASAO_DUCK_COUNT}羽の合鴨を放し、草や虫を食べてもらいます。稲だけでなく、合鴨の元気も毎朝確かめます。`,
       },
       {
-        title: "泳ぐ仕事と、水を見る仕事",
+        title: "泳いで水をかき混ぜる",
         description:
           "合鴨が泳いで水をかき混ぜると、雑草が育ちにくくなります。私は水の深さや稲を毎日確認します。",
       },
       {
-        title: "穂が出る前に選手交代",
+        title: "穂が出る前に合鴨を移す",
         description:
           "合鴨が稲穂を食べないよう、穂が出る前に田んぼから引き上げます。その後も水管理を続けます。",
       },
