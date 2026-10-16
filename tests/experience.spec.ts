@@ -303,7 +303,7 @@ for (const farmer of [
   {
     name: "たくみ",
     skips: 1,
-    second: "トマトのこだわりは？",
+    second: "誰の顔色をうかがっているんですか？",
     variety: "桃太郎",
   },
   {

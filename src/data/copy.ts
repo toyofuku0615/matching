@@ -1,4 +1,5 @@
 import type { PreferenceOption } from "./types";
+import { MASAO_DUCK_COUNT } from "./agriculture";
 
 /** Main interface copy lives here so the experience can be edited without touching UI. */
 export const copy = {
@@ -144,8 +145,8 @@ export const ui = {
     welcomeTakumiAlt: "たくみさん、トマト農家",
     welcomeMihoAlt: "笑顔のみほさん、いちご農家",
     welcomeMasaoAlt: "まさおさん、お米農家",
-    welcomeTakumiCaption: "一途です。🍅",
-    welcomeMasaoCaption: "米ひとすじ。🌾",
+    welcomeTakumiCaption: "毎朝、顔色。🍅",
+    welcomeMasaoCaption: `カモが${MASAO_DUCK_COUNT}羽。🦆`,
     welcomeDoodle: "hello, farmer!",
     welcomeEyebrow: "A FRESH KIND OF CONNECTION",
     profileDetails: "プロフィール詳細",

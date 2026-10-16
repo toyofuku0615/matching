@@ -1,5 +1,5 @@
 import type { Conversation, FarmerId } from "./types";
-import { agriculture } from "./agriculture";
+import { agriculture, MASAO_DUCK_COUNT } from "./agriculture";
 
 /** Fixed demo scripts only: no AI, live messages, or real farming claims. */
 export const conversations: Record<FarmerId, Conversation> = {
@@ -65,10 +65,22 @@ export const conversations: Record<FarmerId, Conversation> = {
   },
   takumi: {
     greeting: [
-      "いい根、どうも。たくみです🍅\nハウスの見回りが終わりました。今日もトマトに異常なし。",
-      "トマト一筋50年です。\n浮気をする暇があったら、脇芽を取っています。",
+      "いい根、どうも。たくみです🍅\n朝の見回りが済んだところです。",
+      "プロフィールの一言、気になりましたか。\n話すのは得意ではないですが、気になることなら聞いてください。",
     ],
     questions: [
+      {
+        farmerId: "takumi",
+        questionId: "care",
+        userMessage: "誰の顔色をうかがっているんですか？",
+        farmerResponse: [
+          "もちろん、トマトです。\n毎朝、葉や実の色、土の湿り、天気を見ます。土が湿っていれば水を控えるし、暑い日は換気を調整。見たことは毎日ノートに残しています。",
+          `『${agriculture.takumi.brand}』は、${agriculture.takumi.variety}を${agriculture.takumi.method}で。樹で色づくまで待ちます。\n50年やっても、朝は答え合わせです。まずは切って、そのままどうぞ。`,
+        ],
+        typingDelay: 700,
+        nextRecommendedQuestion: "dog",
+        offerUnlocked: true,
+      },
       {
         farmerId: "takumi",
         questionId: "reason",
@@ -79,18 +91,6 @@ export const conversations: Record<FarmerId, Conversation> = {
         ],
         typingDelay: 800,
         nextRecommendedQuestion: "care",
-        offerUnlocked: true,
-      },
-      {
-        farmerId: "takumi",
-        questionId: "care",
-        userMessage: "トマトのこだわりは？",
-        farmerResponse: [
-          `『${agriculture.takumi.brand}』は、大玉の${agriculture.takumi.variety}を${agriculture.takumi.method}で。樹の上で色づくのを待ちます。\n水は決まった量を機械的に、とはいきません。土の乾き具合と、葉の様子と、天気を見ます。`,
-          "『今日は休みにしよう』と思った朝ほど、天気予報を見直すことになります。予定はトマト優先です。",
-        ],
-        typingDelay: 700,
-        nextRecommendedQuestion: "dog",
         offerUnlocked: true,
       },
       {
@@ -125,10 +125,22 @@ export const conversations: Record<FarmerId, Conversation> = {
   },
   masao: {
     greeting: [
-      "いい根、ありがとうね。まさおです🌾\n田んぼの水を見てきたところです。",
-      "米とは55年の付き合いです。\n毎年付き合い方が変わるので、まだ勉強中ですね。",
+      "いい根、ありがとうね。まさおです🌾\n田んぼから戻って、お茶をいれたところです。",
+      "プロフィールのカモ、気になりましたか。\n聞かれると、つい話が長くなります。",
     ],
     questions: [
+      {
+        farmerId: "masao",
+        questionId: "care",
+        userMessage: "なんでそんなにカモを飼っているんですか？",
+        farmerResponse: [
+          `うちの${MASAO_DUCK_COUNT}羽は、米作りの相棒なんです。\n合鴨が草や虫を食べ、泳いで水をかき混ぜます。私は水の深さと稲の育ち、カモの元気を毎朝見ます。`,
+          `穂を食べられないよう、穂が出る前には田んぼから上げるんです。\n『${agriculture.masao.brand}』は、${agriculture.masao.variety}を${agriculture.masao.method}で。55年やっても、天気には教わるばかりです。\n台所では炊飯器に頑張ってもらいます。分担です。`,
+        ],
+        typingDelay: 800,
+        nextRecommendedQuestion: "holiday",
+        offerUnlocked: true,
+      },
       {
         farmerId: "masao",
         questionId: "reason",
@@ -151,18 +163,6 @@ export const conversations: Record<FarmerId, Conversation> = {
         ],
         typingDelay: 850,
         nextRecommendedQuestion: "care",
-        offerUnlocked: true,
-      },
-      {
-        farmerId: "masao",
-        questionId: "care",
-        userMessage: "合鴨農法って何ですか？",
-        farmerResponse: [
-          `『${agriculture.masao.brand}』は、${agriculture.masao.variety}を${agriculture.masao.method}で育てています。\n合鴨に草や虫を食べてもらうんです。泳いで水をかき混ぜるのも、草を育ちにくくする仕事です。`,
-          "私は水の深さや稲を見ます。穂を食べられないよう、穂が出る前には合鴨を田んぼから上げます。\n台所では炊飯器に頑張ってもらいます。分担です。",
-        ],
-        typingDelay: 800,
-        nextRecommendedQuestion: "holiday",
         offerUnlocked: true,
       },
       {

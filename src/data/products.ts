@@ -1,5 +1,5 @@
 import type { FarmerId, Product } from "./types";
-import { agriculture } from "./agriculture";
+import { agriculture, MASAO_DUCK_COUNT } from "./agriculture";
 
 const image = (name: string) =>
   `${import.meta.env.BASE_URL}images/${name}.webp`;
@@ -25,7 +25,7 @@ export const products: Record<FarmerId, Product> = {
     image: image("tomatoes"),
     price: "¥1,600",
     shipping: "送料込み · 体験版の架空価格です",
-    letter: `${agriculture.takumi.method}の${agriculture.takumi.variety}。樹の上で色づくのを待ちました。\nまずは切って、そのまま。\n説明は短めに。味の話はトマトに任せます。\n— たくみ`,
+    letter: `毎朝、葉と実の色を見て育てた${agriculture.takumi.method}の${agriculture.takumi.variety}です。樹の上で色づくのを待ちました。\nまずは切って、そのまま。\n今度は、食べたあなたの顔が気になります。\n— たくみ`,
     cta: "この人のトマトを食べてみたい",
   },
   masao: {
@@ -36,7 +36,7 @@ export const products: Record<FarmerId, Product> = {
     image: image("rice"),
     price: "¥1,400",
     shipping: "送料込み · 体験版の架空価格です",
-    letter: `${agriculture.masao.method}で育てた${agriculture.masao.variety}です。\nおかずは、いつものもので。\nおかわりが出たら、今年もひと安心です。\n— まさお`,
+    letter: `${MASAO_DUCK_COUNT}羽の合鴨と、${agriculture.masao.method}で育てた${agriculture.masao.variety}です。\nおかずは、いつものもので。\nおかわりが出たら、今年もひと安心です。\n— まさお`,
     cta: "この人のお米を食べてみたい",
   },
 };

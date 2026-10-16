@@ -112,26 +112,26 @@ const experiencedFarmers = [
     name: "たくみ",
     age: "72",
     skips: 1,
-    tagline: "トマト一筋、浮気しません。",
-    greeting: "今日もトマトに異常なし。",
+    tagline: "毎朝、顔色をうかがってます。",
+    greeting: "プロフィールの一言、気になりましたか。",
     invitation: "あとは現物に任せます",
     brand: "たくみの一途トマト",
     variety: "桃太郎",
     method: "土耕栽培",
     practices: [
-      "水やりは畑に聞く",
+      "毎朝の観察で水加減を決める",
       "脇芽の手入れをこつこつ",
       "樹の上で色づきを待つ",
     ],
-    careQuestion: "トマトのこだわりは？",
+    careQuestion: "誰の顔色をうかがっているんですか？",
     product: "桃太郎 おすそ分け",
     productTitle: "完熟 桃太郎トマト お試しセット",
     questions: [
+      ["誰の顔色をうかがっているんですか？", "もちろん、トマトです。"],
       [
         "どうして農家になったんですか？",
         "トマトの研究には、定年がないようです。",
       ],
-      ["トマトのこだわりは？", "予定はトマト優先です。"],
       ["愛犬はどんな子ですか？", "残業はしない方針らしい。見習いたいですね。"],
       [
         "おすすめの食べ方、教えてください！",
@@ -144,8 +144,8 @@ const experiencedFarmers = [
     name: "まさお",
     age: "76",
     skips: 2,
-    tagline: "米とは55年の真剣交際。",
-    greeting: "田んぼの水を見てきたところです。",
+    tagline: "カモを30羽飼ってます。",
+    greeting: "プロフィールのカモ、気になりましたか。",
     invitation: "米を少し、持っていきませんか。",
     brand: "まさおの合鴨田んぼ米",
     variety: "コシヒカリ",
@@ -155,10 +155,14 @@ const experiencedFarmers = [
       "泳ぐ仕事と、水を見る仕事",
       "穂が出る前に選手交代",
     ],
-    careQuestion: "合鴨農法って何ですか？",
+    careQuestion: "なんでそんなにカモを飼っているんですか？",
     product: "コシヒカリ おすそ分け",
     productTitle: "合鴨育ち コシヒカリ お試しセット",
     questions: [
+      [
+        "なんでそんなにカモを飼っているんですか？",
+        "うちの30羽は、米作りの相棒なんです。",
+      ],
       [
         "どうして農家になったんですか？",
         "天気のほうは、こちらの経歴を見てくれません。",
@@ -166,10 +170,6 @@ const experiencedFarmers = [
       [
         "農家をしていて嬉しいことは？",
         "帰りの車は少し重くなります。米を積むので。",
-      ],
-      [
-        "合鴨農法って何ですか？",
-        "台所では炊飯器に頑張ってもらいます。分担です。",
       ],
       [
         "お休みの日は何をしていますか？",
@@ -253,6 +253,20 @@ for (const farmer of experiencedFarmers) {
       )
       .toBe(true);
     const farmingProfile = profile.locator(".agriculture-info");
+    if (farmer.id === "masao") {
+      await expect(profile.locator(".detail-body > p").first()).toContainText(
+        "カモを30羽",
+      );
+      await expect(
+        farmingProfile.locator(".agriculture-summary"),
+      ).toContainText("30羽の合鴨");
+      await expect(
+        farmingProfile.locator(".agriculture-practices"),
+      ).toContainText("30羽の合鴨");
+      expect(new Set((await profile.innerText()).match(/\d+羽/g))).toEqual(
+        new Set(["30羽"]),
+      );
+    }
     await expect(farmingProfile.locator(".agriculture-brand")).toHaveText(
       farmer.brand,
     );
@@ -287,11 +301,25 @@ for (const farmer of experiencedFarmers) {
     });
     await expect(conversation).toContainText(farmer.greeting);
     await expect(page.locator(".quick-replies button")).toHaveCount(4);
-    await page
-      .getByRole("textbox", { name: "メッセージ", exact: true })
-      .fill("畑の様子を教えてください");
-    await page.getByRole("button", { name: "メッセージを送信" }).tap();
-    await expect(conversation).toContainText("決まった台本で話す体験版");
+    if (farmer.id !== "miho") {
+      await expect(page.locator(".quick-replies button").first()).toContainText(
+        farmer.careQuestion,
+      );
+      await expect(conversation).not.toContainText(
+        farmer.id === "takumi" ? "トマト" : "合鴨",
+      );
+      await expect(conversation).not.toContainText(
+        farmer.id === "takumi" ? "葉や実の色" : "米作りの相棒",
+      );
+    }
+    const tryFreeMessage = async () => {
+      await page
+        .getByRole("textbox", { name: "メッセージ", exact: true })
+        .fill("畑の様子を教えてください");
+      await page.getByRole("button", { name: "メッセージを送信" }).tap();
+      await expect(conversation).toContainText("決まった台本で話す体験版");
+    };
+    if (farmer.id === "miho") await tryFreeMessage();
     await expect(page.locator(".chat-product")).toHaveCount(0);
     for (const [index, [question, punchline]] of farmer.questions.entries()) {
       const quickReply = page
@@ -317,7 +345,30 @@ for (const farmer of experiencedFarmers) {
           .filter({ hasText: farmer.brand });
         await expect(careAnswer).toContainText(farmer.variety);
         await expect(careAnswer).toContainText(farmer.method);
+        if (farmer.id === "takumi") {
+          await expect(
+            conversation.locator(".message-row:not(.own) .bubble").nth(2),
+          ).toHaveText(/^もちろん、トマトです。/);
+          await expect(conversation).toContainText(
+            "土が湿っていれば水を控えるし",
+          );
+          await expect(conversation).toContainText("毎日ノートに残しています");
+        }
         if (farmer.id === "masao") {
+          await expect(conversation).toContainText("草や虫を食べ");
+          await expect(conversation).toContainText("水をかき混ぜ");
+          await expect(conversation).toContainText("私は水の深さと稲の育ち");
+          await expect(conversation).toContainText(
+            "穂が出る前には田んぼから上げる",
+          );
+          await expect(conversation).toContainText(
+            "台所では炊飯器に頑張ってもらいます。分担です。",
+          );
+          expect(
+            new Set((await conversation.innerText()).match(/\d+羽/g)),
+          ).toEqual(new Set(["30羽"]));
+        }
+        if (farmer.id !== "miho") {
           await expect
             .poll(() =>
               careAnswer.evaluate((el) =>
@@ -332,7 +383,7 @@ for (const farmer of experiencedFarmers) {
               el.scrollIntoView({ block: "start", behavior: "instant" }),
             );
           await page.screenshot({
-            path: `${directory}/12-masao-aigamo-chat.png`,
+            path: `${directory}/12-${farmer.id}-story-chat.png`,
             animations: "disabled",
           });
         }
@@ -358,6 +409,8 @@ for (const farmer of experiencedFarmers) {
         });
       }
     }
+    if (farmer.id !== "miho") await tryFreeMessage();
+    await expect(page.locator(".chat-product")).toHaveCount(1);
     await expect(
       conversation.locator(".bubble").filter({ hasText: farmer.invitation }),
     ).toHaveCount(1);
@@ -401,6 +454,17 @@ for (const farmer of experiencedFarmers) {
     await expect(offerAgriculture.locator(".agriculture-facts")).toContainText(
       farmer.method,
     );
+    if (farmer.id === "masao") {
+      await expect(
+        offerAgriculture.locator(".agriculture-summary"),
+      ).toContainText("30羽の合鴨");
+      await expect(page.locator(".letter-card p")).toContainText("30羽の合鴨");
+    }
+    if (farmer.id === "takumi") {
+      await expect(page.locator(".letter-card p")).toContainText(
+        "食べたあなたの顔が気になります",
+      );
+    }
     await offerAgriculture.scrollIntoViewIfNeeded();
     await expect(offerAgriculture).toBeInViewport();
     await expect(page.locator(".offer-bottom .primary")).toBeInViewport({
@@ -418,6 +482,39 @@ for (const farmer of experiencedFarmers) {
       path: `${directory}/11-${farmer.id}-agriculture-offer.png`,
       animations: "disabled",
     });
+    await page.locator(".offer-bottom .primary").tap();
+    await expect(page.locator(".screen-completed")).toBeVisible();
+    await expect(
+      page.getByText(`${farmer.name}さんと、つながりました。`),
+    ).toBeVisible();
+    await expect(
+      page.getByRole("button", { name: "もう一度、出会う" }),
+    ).toBeInViewport({ ratio: 1 });
+    await expect
+      .poll(() =>
+        page
+          .locator(".screen-completed")
+          .evaluate((el) => Number(getComputedStyle(el).opacity)),
+      )
+      .toBe(1);
+    await expect
+      .poll(() =>
+        page
+          .locator(".completion-art img")
+          .evaluateAll((images) =>
+            images.every((img) => img.complete && img.naturalWidth > 0),
+          ),
+      )
+      .toBe(true);
+    await assertHoretaneBrand(page);
+    await page.screenshot({
+      path: `${directory}/13-${farmer.id}-story-completed.png`,
+      animations: "disabled",
+    });
+    await page.getByRole("button", { name: "もう一度、出会う" }).tap();
+    await expect(
+      page.getByRole("button", { name: "出会いをはじめる" }),
+    ).toBeVisible();
     expect(errors).toEqual([]);
   });
 }

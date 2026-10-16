@@ -1,5 +1,8 @@
 import type { AgricultureProfile, FarmerId } from "./types";
 
+/** Fictional flock size shared by Masao's profile, conversations, and gift. */
+export const MASAO_DUCK_COUNT = 30;
+
 /** Fictional farm brands and practices for this demo, using real crop varieties. */
 export const agriculture: Record<FarmerId, AgricultureProfile> = {
   miho: {
@@ -28,12 +31,12 @@ export const agriculture: Record<FarmerId, AgricultureProfile> = {
     variety: "桃太郎",
     method: "土耕栽培",
     summary:
-      "大玉トマトの桃太郎を、土でじっくり。土・葉・天気で水加減を決めます。一途ですが、毎日同じ対応はしません。",
+      "大玉トマトの桃太郎を、土でじっくり。毎朝、葉と実の色、土の湿り、天気を確かめ、水の量やハウスの換気を調整します。50年続けても、昨日の正解が今日も正解とは限りません。",
     practices: [
       {
-        title: "水やりは畑に聞く",
+        title: "毎朝の観察で水加減を決める",
         description:
-          "土の乾き具合、葉の様子、その日の天気を見て水の量を調整します。",
+          "葉や実の色、土の乾き具合、天気を見て、水の量や換気を調整。観察と手入れの内容は、毎日ノートに記録します。",
       },
       {
         title: "脇芽の手入れをこつこつ",
@@ -50,12 +53,11 @@ export const agriculture: Record<FarmerId, AgricultureProfile> = {
     brand: "まさおの合鴨田んぼ米",
     variety: "コシヒカリ",
     method: "合鴨農法",
-    summary:
-      "コシヒカリの田んぼで、合鴨が草や虫を食べてお手伝い。水の見回りは私。炊くところは炊飯器です。",
+    summary: `コシヒカリを、${MASAO_DUCK_COUNT}羽の合鴨と育てています。草や虫を食べ、水をかき混ぜるのが合鴨の仕事。水の深さや稲の管理は、55年目の私の仕事です。`,
     practices: [
       {
         title: "合鴨は草取りの相棒",
-        description: "田植え後の田んぼに合鴨を放し、草や虫を食べてもらいます。",
+        description: `田植え後の田んぼに${MASAO_DUCK_COUNT}羽の合鴨を放し、草や虫を食べてもらいます。稲だけでなく、合鴨の元気も毎朝確かめます。`,
       },
       {
         title: "泳ぐ仕事と、水を見る仕事",
