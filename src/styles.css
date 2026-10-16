@@ -509,6 +509,17 @@ input {
 .welcome-copy h1 {
   font-size: 29px;
   letter-spacing: -0.055em;
+  line-height: 1.7;
+}
+.welcome-copy ruby {
+  ruby-position: over;
+  ruby-align: center;
+}
+.welcome-copy rt {
+  font-size: 0.4em;
+  font-weight: 650;
+  line-height: 1;
+  letter-spacing: 0.1em;
 }
 .welcome-copy p {
   white-space: pre-line;

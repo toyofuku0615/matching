@@ -19,7 +19,12 @@ export const copy = {
   },
   welcome: {
     eyebrow: "ときめく、産地直結の出会い。",
-    title: "運命よりも、産直。",
+    title: {
+      prefix: "この",
+      base: "農家",
+      reading: "ヒト",
+      suffix: "、タイプかも。",
+    },
     description: "気になるあの人、\n育てているものまで好きになる。",
     cta: "出会いをはじめる",
     duration: "3分で体験できるデモ",

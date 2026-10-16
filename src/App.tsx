@@ -210,7 +210,16 @@ export default function App() {
                   </div>
                   <div className="welcome-copy">
                     <span className="eyebrow">{ui.app.welcomeEyebrow}</span>
-                    <h1>{copy.welcome.title}</h1>
+                    <h1>
+                      {copy.welcome.title.prefix}
+                      <ruby>
+                        {copy.welcome.title.base}
+                        <rp>（</rp>
+                        <rt>{copy.welcome.title.reading}</rt>
+                        <rp>）</rp>
+                      </ruby>
+                      {copy.welcome.title.suffix}
+                    </h1>
                     <p>{copy.welcome.description}</p>
                   </div>
                 </div>
